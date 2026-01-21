@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>WebAR Cube Test</title>
+  <title>WebAR Cube Stabilized</title>
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
@@ -33,10 +33,16 @@
     <!-- Camera -->
     <a-camera position="0 0 0"></a-camera>
 
+    <!-- Assets -->
+    <a-assets>
+      <!-- Cube صغير + أزرق -->
+      <!-- هنا مجرد Box A-Frame بدل موديل .glb عشان استقرار أفضل -->
+    </a-assets>
+
     <!-- Target Index 0 -->
     <a-entity mindar-image-target="targetIndex: 0">
-      <!-- Cube 3D صغير -->
-      <a-box id="test-cube" position="0 0.05 0" color="blue" scale="0.1 0.1 0.1"></a-box>
+      <!-- Cube أكبر + ثابت أكثر -->
+      <a-box id="stabilized-cube" position="0 0.05 0" color="blue" scale="0.3 0.3 0.3"></a-box>
     </a-entity>
 
   </a-scene>
