@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MindAR Matrix Lock</title>
+
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<a-scene
+  mindar-image="imageTargetSrc: targets.mind;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: true"
+  renderer="logarithmicDepthBuffer: true;"
+>
+
+  <a-camera position="0 0 0"></a-camera>
+
+  <!-- TARGET -->
+  <a-entity mindar-image-target="targetIndex: 0" id="target">
+    
+    <!-- CUBE -->
+    <a-box
+      matrix-lock
+      color="red"
+      scale="0.25 0.25 0.25">
+    </a-box>
+
+  </a-entity>
+
+</a-scene>
+
+<script>
+AFRAME.registerComponent('matrix-lock', {
+  tick: function () {
+    const target = this.el.parentEl.object3D;
+    const cube = this.el.object3D;
+
+    // خذ الماتريكس تبع التارجت
+    cube.matrix.copy(target.matrixWorld);
+
+    // حرّك الكيوب فوق الكرت (offset صغير جدًا)
+    cube.matrix.multiply(
+      new THREE.Matrix4().makeTranslation(0, 0, 0.01)
+    );
+
+    cube.matrixAutoUpdate = false;
+  }
+});
+</script>
+
+</body>
+</html>
